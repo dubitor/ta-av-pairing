@@ -1,5 +1,4 @@
 use std::collections::VecDeque;
-use std::cell::{RefCell, RefMut};
 
 struct Digraph {
     // adjacency_list[v] is a list of all the vertices w where there are edges v->w
@@ -10,7 +9,7 @@ impl Digraph {
     // Create digraph with given number of vertices
     fn new(num_vertices: usize) -> Digraph {
         let entry: Vec<usize> = Vec::new();
-        let adjacency_list: Vec<Vec<usize>> = vec![entry.clone(); num_vertices];
+        let adjacency_list: Vec<Vec<usize>> = vec![entry; num_vertices];
         Digraph { adjacency_list }
     }
 
@@ -78,7 +77,7 @@ fn topological_sort(g: &Digraph) -> Option<Vec<usize>> {
 
     match order.len() {
         x if x == size => Some(order),
-        _ => None
+        _ => None,
     }
 }
 
