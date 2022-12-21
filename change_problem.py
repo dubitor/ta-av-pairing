@@ -6,6 +6,8 @@
 # You can use as many of each coin as you like
 # e.g. s = 10, c = [7, 5, 2, 1]. Answer = 2 (5 + 5)
 
+import big_o
+
 def smallest_change(s, c):
     num_coins = 0
     cur_nodes = [0]
@@ -30,3 +32,18 @@ def test_smallest_change():
     s, c = 10, [7, 5, 2, 1]
     ans = 2
     assert smallest_change(s, c) == ans
+
+def calculate_complexity():
+    def smallest_change_wrapper(inputs):
+        return smallest_change(*inputs)
+
+    def input_generator(n):
+        return (big_o.datagen.n_(n), [*set(big_o.datagen.integers(n, 1, n))])
+
+    best, others = big_o.big_o(smallest_change_wrapper, input_generator, n_measures=1000, n_timings=2)
+    print(best)
+    for class_, residuals in others.items():
+        print('{!s:<60s}    (res: {:.2G})'.format(class_, residuals))
+
+if __name__ == "__main__":
+    calculate_complexity()
